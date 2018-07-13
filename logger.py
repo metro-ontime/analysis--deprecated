@@ -4,7 +4,7 @@ import urllib.request
 from datetime import datetime
 
 # Set line and agency
-line = '804'
+line = '802'
 agency = 'lametro-rail'
 
 #open database
