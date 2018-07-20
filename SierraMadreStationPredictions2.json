@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "block_id": "407",
+      "minutes": 7,
+      "run_id": "804_0_var0",
+      "seconds": 474,
+      "is_departing": true,
+      "route_id": "804"
+    },
+    {
+      "block_id": "426",
+      "minutes": 12,
+      "run_id": "804_0_var0",
+      "seconds": 732,
+      "is_departing": true,
+      "route_id": "804"
+    },
+    {
+      "block_id": "408",
+      "minutes": 27,
+      "run_id": "804_0_var0",
+      "seconds": 1674,
+      "is_departing": true,
+      "route_id": "804"
+    },
+    {
+      "block_id": "403",
+      "minutes": 3,
+      "run_id": "804_1_var0",
+      "seconds": 194,
+      "is_departing": true,
+      "route_id": "804"
+    },
+    {
+      "block_id": "454",
+      "minutes": 18,
+      "run_id": "804_1_var0",
+      "seconds": 1081,
+      "is_departing": true,
+      "route_id": "804"
+    },
+    {
+      "block_id": "404",
+      "minutes": 25,
+      "run_id": "804_1_var0",
+      "seconds": 1537,
+      "is_departing": true,
+      "route_id": "804"
+    },
+    {
+      "block_id": "422",
+      "minutes": 25,
+      "run_id": "804_1_var0",
+      "seconds": 1550,
+      "is_departing": true,
+      "route_id": "804"
+    }
+  ]
+}

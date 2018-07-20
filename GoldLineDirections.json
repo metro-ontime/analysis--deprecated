@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "display_in_ui": true,
+      "id": "804_0_var0",
+      "display_name": "804 - Azusa / Citrus",
+      "route_id": "804_0_var0",
+      "direction_name": "0"
+    },
+    {
+      "display_in_ui": true,
+      "id": "804_1_var0",
+      "display_name": "804 - Atlantic Station",
+      "route_id": "804_1_var0",
+      "direction_name": "1"
+    }
+  ]
+}
