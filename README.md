@@ -18,7 +18,7 @@ Possible future directions for this project include:
  - Benchmarking the LA Metro system against other transit systems worldwide. Open-sourcing our analysis is the first step towards beginning a discussion on how to measure and compare transit systems worldwide. Due to budget constraints and ageing infrastructure, perfect GPS tracking and precise reporting of arrival times is not commonly found in rail systems. We want to develop low-cost and reliable methods to estimate train arrival times at stations. 
  - Monitoring causes of delays and providing additional statistics on these.
 
-## For Contributors & those who want to help:
+## For Contributors:
 
 What We Need:
  - Developers (Python and/or GIS systems knowledge -- HIGH PRIORITY)
@@ -27,6 +27,17 @@ What We Need:
  - QA Testers (spotting bugs, feedback on site-design -- currently low priority)
 
 This web application is built on a python backend, which logs and processes vehicle tracking data from Metro's real-time API. The front end is a React app hosted on a static server (GitHub or Netlify - TBC) that is recompiled daily as new performance data becomes available on our python backend. 
+
+Please see the repo "Issues" tab for currently open tickets.
+
+## Analysis Methodology:
+
+LA Metro's real-time API (https://developer.metro.net/introduction/realtime-api-overview/) provides the "positions of Metro vehicles on their routes in real time." Our peformance monitor logs the output of this API, storing each vehicle's coordinates along with its direction, vehicle_id and the time of its last position update in a database (PostgreSQL - TBC). We then reconstruct each vehicle's journey and estimate the actual times that it arrived at each stop, which we can then compare to the schedule. This process is not without flaws, so we are encouraging debate over how to improve our algorithms and measure train performance in a way that is most useful to riders. For example, depending on the time of day, a more useful metric of Metro performance might be the average wait time between services. If trains are not strictly following the schedule but are running relatively frequently - does that matter to riders?
+
+Our understanding of Metro's current reporting system for measuring late arrivals is this:
+Any train arriving at a station more than FIVE minutes after it is scheduled is recorded manually by Metro staff. 
+
+At peak times when trains might be running 5 or 6 minutes apart - they could simply disregard the schedule and still claim 100% on time arrivals. This is one reason we believe that a more transparent and precise performance measurement tool would be valuable.
 
 ## This Repository:
 
