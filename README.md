@@ -10,13 +10,16 @@ This website, incubated at Hack for LA, tracks LA Metro trains and provides up t
  - Purple Line
  - Expo Line
 
-Currently, monitoring the LA bus network is outside the scope of this project. 
-
 By publishing these statistics and open-sourcing our methodology, we aim to give riders an accurate and unvarnished picture of the system's state over time. Hopefully, this will correct any public misperception of Metro's track record and help inform decision-makers when assessing future improvements to the system.
 
 Possible future directions for this project include:
  - Benchmarking the LA Metro system against other transit systems worldwide. Open-sourcing our analysis is the first step towards beginning a discussion on how to measure and compare transit systems worldwide. Due to budget constraints and ageing infrastructure, perfect GPS tracking and precise reporting of arrival times is not commonly found in rail systems. We want to develop low-cost and reliable methods to estimate train arrival times at stations. 
  - Monitoring causes of delays and providing additional statistics on these.
+
+### Non-Goals:
+- Currently, monitoring the LA bus network is outside the scope of this project. 
+- We do not plan to duplicate/compete with existing services that provide upcoming arrival predictions. NextBus, Google Maps and Transit already provide these services. We focus on historical data only.
+ - We will not produce any new 'raw' data - for example like Transit's approach of gathering crowd-sourced positioning data from its users to support and improve Metro's predictions.
 
 ## For Contributors:
 
@@ -29,6 +32,10 @@ What We Need:
 This web application is built on a python backend, which logs and processes vehicle tracking data from Metro's real-time API. The front end is a React app hosted on a static server (GitHub or Netlify - TBC) that is recompiled daily as new performance data becomes available on our python backend. 
 
 Please see the repo "Issues" tab for currently open tickets.
+
+## Research:
+
+Please refer to the file ./Data_Catalog in this repository for a summary of data sources and research articles relevant to understanding the Metro API and our monitoring process. 
 
 ## Analysis Methodology:
 
