@@ -14,7 +14,7 @@ def rawLogToGDF(log):
 def selectAnalysisWindow(log, start_date, end_date):
   start_date = pd.to_datetime(start_date)
   end_date = pd.to_datetime(end_date)
-  return log[start_date:end_date].reset_index()
+  return log[start_date:end_date]
 
 def findRelativePositions(positions, line):
   relative_positions = [line.project(position.geometry) / line.length for index, position in positions.iterrows()]
