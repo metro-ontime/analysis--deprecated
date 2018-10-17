@@ -3,6 +3,30 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
 
+class Marey:
+    def __init__(self, stations, vehicles):
+        self.stations = stations
+        self.vehicles = vehicles
+        self.train_ids = list(vehicles['trip_id'].unique())
+        self.colors = assignColorsToTrains(self.train_ids)
+        self.trips = vehicles.sort_values('datetime').groupby('trip_id')
+
+    def plot(self):
+      plt.style.use('dark_background')
+      fig = plt.figure(figsize=[60,48])
+      ax1 = fig.add_subplot(121)
+      format_time_axis(ax1, self.vehicles.datetime.min(), self.vehicles.datetime.max())
+      format_location_axis(ax1)
+      
+      for index, vehicle in self.trips:
+        times = vehicle['datetime'].values
+        distances = vehicle['relative_position'].values
+        ax1.plot(distances, times, lw=2, color=self.colors[index])
+
+      for station in self.stations.itertuples():
+        ax1.axvline(station.relative_position, color='#555555', lw=1, linestyle='-.')
+        ax1.text(station.relative_position, self.vehicles.datetime.min(), station.display_name + '  ', fontSize='18', color='#999999', rotation='vertical', horizontalalignment='center', verticalalignment='top')
+  
 def makeLineMap(line):
   line_plot = gpd.GeoSeries(line)
   line_plot = line_plot.plot(figsize=(24, 24), color="white")
@@ -23,7 +47,7 @@ def assignColorsToTrains(train_ids):
   colors = plt.cm.colors.ListedColormap(plt.cm.jet(vals))
   return {train_ids[index]: colors(index) for index in range(len(train_ids))}
 
-def makeMarey(stations, vehicles, colors, time_min, time_max):
+def makeMarey():
   plt.style.use('dark_background')
   fig = plt.figure(figsize=[60,48])
   ax1 = fig.add_subplot(121)
@@ -33,8 +57,6 @@ def makeMarey(stations, vehicles, colors, time_min, time_max):
   for index, vehicle in vehicles:
     times = vehicle['datetime']
     distances = vehicle['relative_position'].values
-    nans = np.where(np.abs(np.diff(distances)) >= 0.2)[0]
-    distances[nans] = np.nan
     ax1.plot(distances, times, lw=2, color=colors[index])
 
   for index, row in stations.iterrows():
