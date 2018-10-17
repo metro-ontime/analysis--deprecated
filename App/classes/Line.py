@@ -1,25 +1,15 @@
-import json
-from App.classes.LineBuilder import create_ordered_line
-import geopandas as gpd
+from App.classes.Track import create_ordered_line
+from App.classes.Stations import prepareStations
 import pandas as pd
-from shapely.geometry import Point
-from App.classes.Tracker import findRelativePositions
 
-def buildLineFromJSON(path):
-  data = json.load(open(path))
-  return create_ordered_line(data)
+class Line:
+    def __init__(self, line_id, track, stations, schedule):
+        self.id = str(line_id)
+        self.track = create_ordered_line(track)
+        self.stations = prepareStations(stations, self.track)
+        self.schedule = schedule
 
-def loadStations(stations, line):
-  stations = pd.DataFrame(stations)
-  stations = gpd.GeoDataFrame(stations, geometry = [Point(xy) for xy in zip(stations.longitude, stations.latitude)])
-  stations = stations.drop(['latitude', 'longitude'], axis=1)
-  stations = findRelativePositions(stations, line)
-  stations = parseStopIds(stations)
-  return stations
+    def getScheduleWithCoordinates(self):
+        merged = self.schedule.times.merge(self.stations, how = 'inner', on = 'station_id')
+        return merged[['datetime', 'trip_id', 'arrival_time', 'departure_time', 'stop_id', 'station_id', 'display_name', 'stop_headsign', 'relative_position', 'geometry']]
 
-def parseStopIds(stationList):
-  line_ids = list(map(lambda x: str(x)[0:3], list(stationList.id)))
-  station_ids = list(map(lambda x: str(x)[3:5], list(stationList.id)))
-  stationList.loc[:, 'line_id'] = pd.Series(line_ids, index=stationList.index)
-  stationList.loc[:, 'station_id'] = pd.Series(station_ids, index=stationList.index)
-  return stationList

@@ -110,3 +110,35 @@ You can set up our logging script to track trains locally on any Unix machine ru
 
 Currently, you must edit log_job.sh to choose the line you wish to track - we will rewrite this to log all rail lines once we are ready to scale up.
 
+### Front End
+## Feature Summary:
+
+Line:
+ - Gold
+    Daily Performance Summary:
+     - Today:
+        No. of trains that were scheduled
+        No. of trains that actually ran
+        No. of trains that ran on time:
+          - 1 minute tolerance
+          - 2 minute tolerance
+          - 3 minute tolerance
+          - 4 minute tolerance
+          - 5 minute tolerance
+     - This Week
+     - This Month
+     - This Year
+ - Blue
+ - Red/Purple
+ etc.
+
+Average Time Between Trains
+ - Time period A (4am - 6am)
+    Today
+    This Week
+    This Month
+    This Year
+ - Time period B (6am - 8am)
+ etc.
+
+
