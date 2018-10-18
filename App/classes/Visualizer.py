@@ -47,23 +47,6 @@ def assignColorsToTrains(train_ids):
   colors = plt.cm.colors.ListedColormap(plt.cm.jet(vals))
   return {train_ids[index]: colors(index) for index in range(len(train_ids))}
 
-def makeMarey():
-  plt.style.use('dark_background')
-  fig = plt.figure(figsize=[60,48])
-  ax1 = fig.add_subplot(121)
-  format_time_axis(ax1, time_min, time_max)
-  format_location_axis(ax1)
-  
-  for index, vehicle in vehicles:
-    times = vehicle['datetime']
-    distances = vehicle['relative_position'].values
-    ax1.plot(distances, times, lw=2, color=colors[index])
-
-  for index, row in stations.iterrows():
-    ax1.axvline(row['relative_position'], color='#555555', lw=1, linestyle='-.')
-    ax1.text(row['relative_position'], time_min, row['display_name'] + '  ', fontSize='18', color='#999999', rotation='vertical', horizontalalignment='center', verticalalignment='top')
-  
-
 def format_time_axis(axis, time_min, time_max):
   time_interval = matplotlib.dates.MinuteLocator(byminute=None, interval=5, tz=None)
   interval_format = matplotlib.dates.DateFormatter('%H:%M')
