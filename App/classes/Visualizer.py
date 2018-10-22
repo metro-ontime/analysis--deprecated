@@ -13,9 +13,9 @@ class Marey:
 
     def plot(self):
       plt.style.use('dark_background')
-      fig = plt.figure(figsize=[60,48])
+      fig = plt.figure(figsize=[60,100])
       ax1 = fig.add_subplot(121)
-      format_time_axis(ax1, self.vehicles.datetime.min(), self.vehicles.datetime.max())
+      format_time_axis(ax1, self.vehicles.datetime.max(), self.vehicles.datetime.min())
       format_location_axis(ax1)
       
       for index, vehicle in self.trips:
@@ -25,7 +25,7 @@ class Marey:
 
       for station in self.stations.itertuples():
         ax1.axvline(station.relative_position, color='#555555', lw=1, linestyle='-.')
-        ax1.text(station.relative_position, self.vehicles.datetime.min(), station.display_name + '  ', fontSize='18', color='#999999', rotation='vertical', horizontalalignment='center', verticalalignment='top')
+        ax1.text(station.relative_position, self.vehicles.datetime.max(), station.display_name + '  ', fontSize='18', color='#999999', rotation='vertical', horizontalalignment='center', verticalalignment='top')
   
 def makeLineMap(line):
   line_plot = gpd.GeoSeries(line)
