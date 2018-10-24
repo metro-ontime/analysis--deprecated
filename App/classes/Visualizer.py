@@ -4,28 +4,39 @@ import numpy as np
 import matplotlib
 
 class Marey:
-    def __init__(self, stations, vehicles):
+    def __init__(self, stations, minTime, maxTime, vehicles, otherVehicles):
         self.stations = stations
         self.vehicles = vehicles
+        self.otherVehicles = otherVehicles
         self.train_ids = list(vehicles['trip_id'].unique())
         self.colors = assignColorsToTrains(self.train_ids)
         self.trips = vehicles.sort_values('datetime').groupby('trip_id')
-
+        self.minTime = minTime
+        self.maxTime = maxTime
+        self.otherTrips = otherVehicles.sort_values('datetime').groupby('trip_id')
+        
     def plot(self):
       plt.style.use('dark_background')
       fig = plt.figure(figsize=[60,100])
       ax1 = fig.add_subplot(121)
-      format_time_axis(ax1, self.vehicles.datetime.max(), self.vehicles.datetime.min())
+      format_time_axis(ax1, self.maxTime, self.minTime)
       format_location_axis(ax1)
       
+      for index, vehicle in self.otherTrips:
+        otherTimes = vehicle['datetime'].values
+        otherDistances = vehicle['relative_position'].values
+        #print(otherTimes)
+        ax1.plot(otherDistances, otherTimes, lw=2, color='#999999')
+        
       for index, vehicle in self.trips:
         times = vehicle['datetime'].values
         distances = vehicle['relative_position'].values
+        #print(times)
         ax1.plot(distances, times, lw=2, color=self.colors[index])
-
+      
       for station in self.stations.itertuples():
         ax1.axvline(station.relative_position, color='#555555', lw=1, linestyle='-.')
-        ax1.text(station.relative_position, self.vehicles.datetime.max(), station.display_name + '  ', fontSize='18', color='#999999', rotation='vertical', horizontalalignment='center', verticalalignment='top')
+        ax1.text(station.relative_position, self.maxTime, station.display_name + '  ', fontSize='18', color='#999999', rotation='vertical', horizontalalignment='center', verticalalignment='top')
   
 def makeLineMap(line):
   line_plot = gpd.GeoSeries(line)
