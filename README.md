@@ -1,3 +1,5 @@
+## **NOTE:** This repo is no longer updated. See our 'performance_tracker' repo now instead.
+
 # Metro Performance Monitor
 
 ### A Health App for the Los Angeles Metro Rail system
